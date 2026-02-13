@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Special One 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        /* Login Page */
+        .login-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000
+        }
+
+        .login-page.hidden {
+            display: none
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: slideDown 1s
+        }
+
+        .login-box h1 {
+            color: #f5576c;
+            font-size: 2.5rem;
+            margin-bottom: 20px
+        }
+
+        .login-box::before {
+            content: '💕';
+            font-size: 80px;
+            display: block;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 3px solid #f5576c;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            letter-spacing: 3px
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #f093fb;
+            box-shadow: 0 0 20px rgba(240, 147, 251, 0.3)
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2)
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px)
+        }
+
+        .error {
+            color: #d63031;
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 20px
+        }
+
+        .hint {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            font-style: italic
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.1)
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            display: none
+        }
+
+        .main-content.active {
+            display: block
+        }
+
+        /* Hearts Background */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 25px;
+            color: rgba(255, 255, 255, 0.3);
+            animation: float 12s infinite
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0
+            }
+
+            10% {
+                opacity: 1
+            }
+
+            90% {
+                opacity: 1
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0
+            }
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000
+        }
+
+        .welcome-screen.hidden {
+            display: none
+        }
+
+        .welcome-content {
+            text-align: center;
+            color: white;
+            padding: 40px
+        }
+
+        .welcome-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite
+        }
+
+        .unlock-btn {
+            background: white;
+            color: #f5576c;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 20px
+        }
+
+        .unlock-btn:hover {
+            transform: scale(1.1)
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            position: relative;
+            z-index: 2
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3)
+        }
+
+        /* Love Letter */
+        .love-letter {
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2
+        }
+
+        .love-letter::before {
+            content: '💌';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 80px;
+            animation: bounce 2s infinite
+        }
+
+        .love-letter h2 {
+            color: #f5576c;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            text-align: center
+        }
+
+        .love-letter p {
+            color: #333;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 20px
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #f5576c;
+            font-size: 1.5rem;
+            margin-top: 30px
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-20px)
+            }
+        }
+
+        /* Gallery */
+        .gallery {
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            margin: 30px auto;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2
+        }
+
+        .gallery h2 {
+            color: #f5576c;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px
+        }
+
+        .gallery-item {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px)
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0)
+        }
+
+        /* Reasons */
+        .reasons {
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            margin: 30px auto;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2
+        }
+
+        .reasons h2 {
+            color: #f5576c;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px
+        }
+
+        .reason-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2)
+        }
+
+        .reason-card:hover {
+            transform: translateY(-10px)
+        }
+
+        .reason-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px
+        }
+
+        .reason-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px
+        }
+
+        /* Question Box */
+        .question-box {
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            margin: 30px auto;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            z-index: 2
+        }
+
+        .question-box h2 {
+            color: #f5576c;
+            font-size: 2.5rem;
+            margin-bottom: 30px
+        }
+
+        .answer-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap
+        }
+
+        .answer-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold
+        }
+
+        .answer-btn:hover {
+            transform: scale(1.1)
+        }
+
+        .answer-btn.no {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            position: relative;
+            transition: all 0.3s
+        }
+
+        .response {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            color: #f5576c;
+            font-weight: bold;
+            min-height: 50px
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            position: relative;
+            z-index: 2
+        }
+
+        @media(max-width:768px) {
+            header h1 {
+                font-size: 2rem
+            }
+
+            .welcome-content h1 {
+                font-size: 2.5rem
+            }
+
+            .love-letter,
+            .gallery,
+            .reasons,
+            .question-box {
+                padding: 30px;
+                margin: 20px
+            }
+        }
+        body.yes-mode {
+  filter: blur(2px);
+}
+
+.yes-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden-letter {
+  background: white;
+  padding: 40px;
+  border-radius: 25px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  animation: fadeIn 0.6s ease;
+}
+
+.hidden-letter h3 {
+  color: #f5576c;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.hidden-letter p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Login Page -->
+    <div class="login-page" id="loginPage">
+        <div class="login-box">
+            <h1>🔐 Enter Password</h1>
+            <p style="color:#666;margin-bottom:20px">This is a special place, protected by love</p>
+            <input type="password" class="password-input" id="passwordInput" placeholder="Enter Password"
+                autocomplete="off">
+            <button class="login-btn" onclick="checkPassword()">Unlock 💖</button>
+            <div class="error" id="errorMsg"></div>
+            <p class="hint">Hint: Our initials 💕</p>
+        </div>
+    </div>
+
+    <!-- Welcome Screen -->
+    <div class="welcome-screen hidden" id="welcomeScreen">
+        <div class="welcome-content">
+            <h1>💖 For Someone Very Special 💖</h1>
+            <p style="font-size:1.5rem">This is just for you...</p>
+            <button class="unlock-btn" onclick="showMainContent()">Click to Open My Heart 💕</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="hearts-bg" id="heartsContainer"></div>
+
+        <header>
+            <h1>💝 To My Special Someone 💝</h1>
+            <p style="font-size:1.3rem">A website made with love, just for you</p>
+        </header>
+
+        <div style="padding:0 20px">
+        <section class="love-letter">
+            <h2>Not Just a  Letter, But the Truth</h2>
+        
+            <p>
+                I don’t believe in perfect stories or fairy tales.
+                I believe in moments — real ones.
+            </p>
+        
+            <p>
+                When I overthink, you steady me.
+                And when I say nothing at all, you still understand.
+            </p>
+            
+            <p>
+                You notice what I don’t say,
+                and you read my silence without needing an explanation.
+            </p>
+            
+            <p>
+                You don’t try to be perfect —
+                you’re simply exactly what I need.
+            </p>
+            
+            <p>
+                And that’s why I feel incredibly lucky
+                to have you in my life.
+            </p>
+            <p>
+                Your positivity, the way you talk,
+                and the way you make me feel  very seen and valued (very special)—
+                it all stays with me long after our conversations end.
+            </p>
+            
+            <p>
+                You have a way of making ordinary moments feel important,
+                and somehow, you always make me feel special without even trying.
+            </p>
+
+            <p>
+                I didn’t make this website to impress you.
+                I made it because words weren’t enough,
+                and silence felt wrong.
+            </p>
+        
+            <p>
+                If one day you ever doubt how much you mean to me,
+                I want you to remember this:
+                someone once paused their entire world
+                just to build a small corner of the internet for you.
+            </p>
+        
+            <div class="signature">
+                — Always choosing you.
+            </div>
+        </section>
+
+
+            <section class="gallery">
+                <h2>Our Beautiful Memories 📸</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="WhatsApp Image 2026-02-08 at 18.58.15.jpeg" alt="Memory">
+                        <div class="gallery-caption">First Time We Met</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="WhatsApp Image 2026-02-08 at 19.01.46.jpeg" alt="Memory">
+                        <div class="gallery-caption">I saw your follow request as an invitation to step into your life</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="WhatsApp Image 2026-02-08 at 19.04.58.jpeg" alt="Memory">
+                        <div class="gallery-caption">our 1st conversation</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="WhatsApp Image 2026-02-13 at 10.47.30.jpeg" alt="Memory">
+                        <div class="gallery-caption">Making Memories</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reasons">
+                <h2>Reasons Why I Love You ❤️</h2>
+                <div class="reasons-grid">
+                    <div class="reason-card">
+                        <div class="icon">😊</div>
+                        <h3>Your Smile</h3>
+                        <p>It lights up my entire world</p>
+                    </div>
+                    <div class="reason-card">
+                        <div class="icon">💭</div>
+                        <h3>Your Kindness</h3>
+                        <p>Your compassion is inspiring</p>
+                    </div>
+                    <div class="reason-card">
+                        <div class="icon">🌟</div>
+                        <h3>Your Spirit</h3>
+                        <p>Your energy is contagious</p>
+                    </div>
+                    <div class="reason-card">
+                        <div class="icon">💪</div>
+                        <h3>Your Strength</h3>
+                        <p>You face challenges with grace</p>
+                    </div>
+                    <div class="reason-card">
+                        <div class="icon">🎨</div>
+                        <h3>Your Creativity</h3>
+                        <p>You inspire me every day</p>
+                    </div>
+                    <div class="reason-card">
+                        <div class="icon">🤗</div>
+                        <h3>Your Love</h3>
+                        <p>You make me the luckiest</p>
+                    </div>
+                </div>
+            </section>
+            <section class="reasons">
+                <h2>And Still, I Don’t Need a Reason</h2>
+            
+                <p style="
+                font-size:1.3rem;
+                line-height:1.9;
+                color:#333;
+                text-align:center;
+                max-width:750px;
+                margin:0 auto;
+              ">
+                    All those reasons above are true.
+                    But even if none of them existed,
+                    my choice would remain the same.
+                    <br><br>
+                    I don’t stay because of qualities,
+                    or moments, or explanations.
+                    <br><br>
+                    I stay because something in me is certain.
+                    <br><br>
+                    Loving you isn’t a decision I keep making —
+                    it’s a decision I already made.
+                </p>
+            </section>
+            <section class="question-box">
+                <h2>Talk To Me 💬</h2>
+            
+                <div id="chatBox" style="
+                border:2px solid #f5576c;
+                border-radius:20px;
+                padding:20px;
+                height:250px;
+                overflow-y:auto;
+                text-align:left;
+                margin-bottom:20px;
+                background:#fff;
+                font-size:1rem;
+              ">
+                    <p><strong>Me:</strong> You can ask me anything.</p>
+                </div>
+            
+                <input type="text" id="userInput" placeholder="Type something..." style="
+                  width:100%;
+                  padding:15px;
+                  border-radius:15px;
+                  border:2px solid #f5576c;
+                  font-size:1rem;
+                ">
+            
+                <button class="answer-btn" onclick="sendMessage()" style="margin-top:15px">
+                    Send 💌
+                </button>
+            </section>
+
+
+
+            <section class="question-box">
+                <h2>Will You Be My Valentine? 💕</h2>
+            
+                <div class="answer-buttons">
+                    <button class="answer-btn" onclick="yesAnswer()">Yes! 💖</button>
+                    <button class="answer-btn no" id="noBtn" onclick="noAnswer()">No</button>
+                </div>
+            
+                <div class="response" id="response"></div>
+            </section>
+
+            <footer>
+                <p>Made with 💖 by Someone Who Loves You Very Much</p>
+                <p>Happy Valentine's Day! 🌹</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Check Password
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            const error = document.getElementById('errorMsg');
+            if (password === 'A&S') {
+                document.getElementById("valPopup").style.display = "flex";
+
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('welcomeScreen').classList.remove('hidden');
+                error.textContent = '';
+                createHeartExplosion();
+            } else {
+                error.textContent = '❌ Wrong password! Try again';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+        function closeValPopup() {
+                document.getElementById("valPopup").style.display = "none";
+            }
+
+
+        // Show Main Content
+        function showMainContent() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('active');
+            createFloatingHearts();
+        }
+
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('heartsContainer');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '💖';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.animationDuration = (10 + Math.random() * 10) + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // Heart explosion
+        function createHeartExplosion() {
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = '💖';
+                heart.style.position = 'fixed';
+                heart.style.left = '50%';
+                heart.style.top = '50%';
+                heart.style.fontSize = '30px';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '9999';
+                document.body.appendChild(heart);
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 100 + Math.random() * 200;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                heart.animate([
+                    { transform: 'translate(-50%,-50%) scale(0)', opacity: 1 },
+                    { transform: `translate(calc(-50% + ${x}px),calc(-50% + ${y}px)) scale(1.5)`, opacity: 0 }
+                ], { duration: 1000, easing: 'ease-out' });
+                setTimeout(() => heart.remove(), 1000);
+            }
+        }
+
+        // Yes Answer
+       function yesAnswer() {
+            const response = document.getElementById("response");
+            const noBtn = document.getElementById("noBtn");
+            const overlay = document.getElementById("yesOverlay");
+
+            response.innerHTML = `
+    Good choice 😌💖  
+    <br><br>
+    Not because I needed an answer —
+    but because I wanted *you* to choose.
+    <br><br>
+    Stay.
+    Don’t say no again.
+    Don’t leave this halfway.
+  `;
+
+            noBtn.disabled = true;
+            noBtn.style.opacity = "0.4";
+            noBtn.style.cursor = "not-allowed";
+
+            overlay.style.display = "flex";
+
+            createHeartExplosion();
+        }
+
+
+        // Move No Button
+        let noCount = 0;
+
+            function noAnswer() {
+                const response = document.getElementById("response");
+                const noBtn = document.getElementById("noBtn");
+
+                noCount++;
+
+                if (noCount === 1) {
+                    response.textContent = "Are you sure? 🤨";
+                }
+                else if (noCount === 2) {
+                    response.textContent = "Like… really sure? 😐";
+                }
+                else if (noCount === 3) {
+                    response.textContent = "Wow. That hurt a little 😤";
+                }
+                else if (noCount === 4) {
+                    response.textContent = "Okay now you’re just testing me 😑";
+                    moveNoButton();
+                }
+                else {
+                    response.textContent = "Nope. You don’t get this option anymore 😏";
+                    moveNoButton();
+                }
+            }
+
+            function moveNoButton() {
+                const btn = document.getElementById("noBtn");
+                const x = Math.random() * 250 - 125;
+                const y = Math.random() * 200 - 100;
+                btn.style.transform = `translate(${x}px, ${y}px)`;
+            }
+
+            function yesAnswer() {
+                    const response = document.getElementById("response");
+                    const noBtn = document.getElementById("noBtn");
+                    const overlay = document.getElementById("yesOverlay");
+
+                    response.innerHTML = `
+    Good choice 😌💖  
+    <br><br>
+    Not because I needed an answer —
+    but because I wanted *you* to choose.
+    <br><br>
+    Stay.
+    Don’t say no again.
+    Don’t leave this halfway.
+  `;
+
+                    noBtn.disabled = true;
+                    noBtn.style.opacity = "0.4";
+                    noBtn.style.cursor = "not-allowed";
+
+                    overlay.style.display = "flex";
+
+                    createHeartExplosion();
+                }
+
+
+
+        // Allow Enter key to submit password
+        document.getElementById('passwordInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+        function sendMessage() {
+                const input = document.getElementById("userInput");
+                const chatBox = document.getElementById("chatBox");
+                const message = input.value.trim().toLowerCase();
+
+                if (!message) return;
+
+                chatBox.innerHTML += `<p><strong>You:</strong> ${input.value}</p>`;
+
+                let reply = "I may not have the perfect words, but I’m here.";
+
+                if (message.includes("love")) {
+                    reply = "Love isn’t loud for me. It’s choosing you quietly, every day.";
+                }
+                else if (message.includes("miss")) {
+                    reply = "I miss you too. Probably more than I admit.";
+                }
+                else if (message.includes("why")) {
+                    reply = "Some things don’t need reasons. You’re one of them.";
+                }
+                else if (message.includes("forever")) {
+                    reply = "I don’t promise forever. I promise honesty — and staying.";
+                }
+                else if (message.includes("trust")) {
+                    reply = "I don’t want blind trust. I want earned trust.";
+                }
+
+                setTimeout(() => {
+                    chatBox.innerHTML += `<p><strong>Me:</strong> ${reply}</p>`;
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 600);
+
+                input.value = "";
+            }
+
+    </script>
+    <div id="yesOverlay" class="yes-overlay" style="display:none">
+        <div class="hidden-letter">
+            <h3>You Stayed 🤍</h3>
+            <h3>Good choice 😌💖</h3>
+            <br><br>
+            Not because I needed an answer —
+            but because I wanted *you* to choose.
+            <br><br>
+            Stay.
+            Don’t say no again.
+            Don’t leave this halfway.
+            <p>
+                I didn’t need a perfect answer.
+                <br><br>
+                I needed to know that when you were asked,
+                you didn’t walk away.
+                <br><br>
+                This isn’t about Valentine’s.
+                It’s about choosing presence over distance.
+                <br><br>
+                Thank you for staying.
+            </p>
+        </div>
+    </div>
+    <div id="valPopup" style="
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 4000;
+    ">
+        <div style="
+        background: white;
+        padding: 40px;
+        border-radius: 30px;
+        text-align: center;
+        max-width: 400px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        animation: fadeIn 0.5s ease;
+      ">
+            <h2 style="color:#f5576c;font-size:2rem;margin-bottom:15px;">
+                💖 Happy Valentine’s Day 💖
+            </h2>
+            <p style="font-size:1.2rem;color:#333;line-height:1.6;">
+                I’m really glad you’re here.<br>
+                This was made just for you.
+            </p>
+            <button onclick="closeValPopup()" style="
+          margin-top:25px;
+          padding:12px 35px;
+          border:none;
+          border-radius:50px;
+          background: linear-gradient(135deg,#f093fb,#f5576c);
+          color:white;
+          font-size:1.1rem;
+          cursor:pointer;
+        ">
+                Okay 💌
+            </button>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
